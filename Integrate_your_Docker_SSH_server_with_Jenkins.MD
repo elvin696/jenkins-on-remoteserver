@@ -1,3 +1,42 @@
+1) docker pull jenkins/jenkins:lts
+2) useradd jenkins
+3) passwd jenkins
+4) groupadd jenkins
+5) usermod -aG wheel jenkins
+6) cd /home/jenkins
+7) mkdir /home/jenkins/jenkins-data 
+8) cd /home/jenkins/jenkins-data
+9) mkdir home/jenkins/jenkins-data/jenkins_home
+10) touch docker-compose.yml
+
+===============================================================
+{
+version: '3'
+services:
+  jenkins:
+    container_name: jenkins
+    image: jenkins/jenkins
+    ports:
+      - "8080:8080"
+    volumes:
+      - $PWD/jenkins_home:/var/jenkins_home
+    networks:
+      - net
+networks:
+  net:
+} >> docker-compose.yml
+
+================================================================
+
+11) chmod +777 /home/jenkins/jenkins-data/jenkins_home
+12) chown jenkins:jenkins /home/jenkins/jenkins-data/jenkins_home -R
+13) docker-compose up -d
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
 1) cd into jenkins folder and create "centos7" folder
 2) cd centos7
 3) vim Dockerfile and write them
